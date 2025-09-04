@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DALMO — Seed • Private • Public Sale (ETH or USDT on Ethereum)</title>
+  <meta name="description" content="DALMO — the Dalmatian Astro-Dog meme coin. Buy with ETH or USDT (ERC20) on Ethereum. Seed: 1–30 Sep 2025 • Private: 1–15 Oct 2025 • Public: 16–31 Oct 2025.">
+  <!-- Privacy hardening -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=()">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="canonical" href="https://www.dalmo.io/">
+  <style>
+    :root{
+      --bg:#0b0b11; --card:#151521; --muted:#aab0c0; --text:#fff;
+      --accent1:#6d6ef6; --accent2:#ec4899; --accent3:#22d3ee;
+      --tab:#1e2333; --tab-border:#39405b; --tab-text:#f5f7ff; --tab-active:#ffffff; --tab-active-text:#0c0f18;
+      --line:#2a3046;
+      --tg:#28a8ea; --mail:#f3b24c;
+      --success:#22c55e; --warn:#ffb8b8;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif; color:var(--text);
+      background:
+        radial-gradient(60% 80% at 50% 0%, rgba(109,110,246,0.15), transparent 70%),
+        radial-gradient(40% 60% at 80% 10%, rgba(236,72,153,0.12), transparent 70%),
+        var(--bg);
+    }
+    a{color:#c7c9ff;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+
+    /* NAV (desktop baseline) */
+    .nav{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(90deg,rgba(13,13,22,.85),rgba(20,20,32,.65));border-bottom:1px solid rgba(255,255,255,.08);z-index:50}
+    .navin{height:88px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.04));display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+    .logoimg{width:100%;height:100%;border-radius:16px;object-fit:cover;display:block}
+    .brandname{font-weight:900;letter-spacing:.5px;font-size:36px}
+    .neontext{color:#fff; -webkit-text-stroke:1px rgba(255,255,255,.35); text-shadow:0 0 6px var(--accent1), 0 0 12px var(--accent1), 0 0 18px var(--accent2), 0 0 28px var(--accent2);}
+    .badge{display:inline-block;font-size:12px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)}
+
+    /* High-contrast tabs */
+    .navtabs{display:flex;gap:10px;align-items:center}
+    .tabbtn{
+      font-size:14px;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800;
+      background:var(--tab); color:var(--tab-text); border:1px solid var(--tab-border);
+      text-transform:uppercase; letter-spacing:.4px;
+      box-shadow:0 2px 8px rgba(0,0,0,.25);
+    }
+    .tabbtn:hover{filter:brightness(1.08)}
+    .tabbtn.active{background:var(--tab-active);color:var(--tab-active-text);border-color:transparent}
+
+    /* Layout (desktop baseline) */
+    .row{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    .hero{grid-column:1 / -1}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+    h1{font-size:48px;margin:0 0 8px;line-height:1.05}
+    h2{font-size:28px;margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:#000;border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .btn.sec{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{font-size:14px}
+    input,select,textarea{width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:#fff;outline:none}
+    code{word-break:break-word;overflow-wrap:anywhere}
+
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;min-width:0}
+    .kpi .title{color:var(--muted);font-size:13px;margin-bottom:4px}
+    .stat{font-weight:800;font-size:28px;line-height:1;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .progress{height:12px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));width:0%}
+
+    /* Meme Gallery (desktop baseline) */
+    .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .meme{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0e0e16;aspect-ratio:3/4}
+    .poster{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+
+    /* Tab content */
+    .tab{display:none}
+    .tab.active{display:block}
+
+    /* Space starfield */
+    .spacebg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+    .spacebg::before,.spacebg::after{content:"";position:absolute;inset:0;pointer-events:none}
+    .spacebg::before{background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 80% 30%, rgba(255,255,255,.8) 50%, transparent 51%),
+      radial-gradient(1.4px 1.4px at 40% 70%, rgba(255,255,255,.7) 50%, transparent 51%),
+      radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,.9) 50%, transparent 51%),
+      radial-gradient(2px 2px at 25% 55%, rgba(255,255,255,.9) 50%, transparent 51%);
+      background-repeat:no-repeat;filter:drop-shadow(0 0 6px rgba(255,255,255,.35));animation:twinkle 12s linear infinite alternate}
+    .spacebg::after{background:
+      radial-gradient(600px 300px at 20% 10%, rgba(109,110,246,.15), transparent 70%),
+      radial-gradient(500px 260px at 80% 20%, rgba(236,72,153,.12), transparent 70%),
+      radial-gradient(420px 220px at 50% 80%, rgba(34,211,238,.10), transparent 70%);
+      filter:blur(0.5px)}
+    @keyframes twinkle{0%{opacity:.6}100%{opacity:1}}
+    footer{border-top:1px solid rgba(255,255,255,.08);margin-top:30px;padding:24px 0;text-align:center;color:var(--muted)}
+    .hidden{display:none}
+    .warn{font-size:12px;color:var(--warn)}
+
+    /* Connect modal (solid, non-transparent) */
+    .modalOverlay{
+      position:fixed;inset:0;background:#0b0b11;
+      display:none;align-items:center;justify-content:center;z-index:60
+    }
+    .modalCard{
+      width:min(520px,92vw);background:#1b2030;
+      border:1px solid #3a405a;border-radius:18px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.6)
+    }
+    .walletbtn{width:100%}
+
+    /* Social rows */
+    .social-list{display:grid;gap:10px}
+    .social-row{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.04)}
+    .icon{width:22px;height:22px;display:inline-grid;place-items:center}
+    .icon svg{display:block}
+
+    /* ====== MOBILE OVERRIDES ONLY ====== */
+    @media (max-width: 900px){
+      .wrap{padding:16px}
+      .row{grid-template-columns:1fr}
+      .brandname{font-size:28px}
+      .logo{width:64px;height:64px}
+      .badge{display:none}
+      .navin{height:auto;padding:8px 0}
+      .navtabs{overflow-x:auto;white-space:nowrap;gap:10px;padding-bottom:4px}
+      .navtabs::-webkit-scrollbar{display:none}
+      .grid2{grid-template-columns:1fr}
+      .btn,.walletbtn{width:100%}
+      .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .mgrid{grid-template-columns:1fr}
+      .meme{aspect-ratio:4/5}
+      h1{font-size:34px}
+      h2{font-size:22px}
+      .modalOverlay{padding:16px}
+      .modalCard{width:100%}
+    }
+    @media (max-width: 380px){
+      .kpis{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="spacebg"></div>
+
+  <!-- Connect Modal -->
+  <div id="connectModal" class="modalOverlay">
+    <div class="modalCard">
+      <h3 style="margin:0 0 6px">Connect a wallet</h3>
+      <div class="muted" style="font-size:12px">Choose a wallet to connect on <strong>Ethereum Mainnet</strong>.</div>
+      <div id="walletList" class="wallets" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"></div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button id="connectDefault" class="btn walletbtn">Default Wallet</button>
+        <a class="btn sec" href="https://metamask.io/download/" target="_blank" rel="noreferrer">Get MetaMask</a>
+        <a class="btn sec" href="https://www.exodus.com/download" target="_blank" rel="noreferrer">Get Exodus</a>
+        <a class="btn sec" href="https://www.myetherwallet.com/" target="_blank" rel="noreferrer">MyEtherWallet</a>
+        <button id="closeModal" class="btn sec" style="margin-left:auto">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="wrap navin">
+      <div class="brand">
+        <div class="logo"><img src="logo.png" alt="DALMO logo" class="logoimg"></div>
+        <span class="brandname neontext">DALMO</span>
+        <span class="badge">Spots on the Moon</span>
+      </div>
+      <div class="navtabs">
+        <button class="tabbtn active" data-tab="home">HOME</button>
+        <button class="tabbtn" data-tab="buy">BUY</button>
+        <button class="tabbtn" data-tab="whitepaper">WHITEPAPER</button>
+        <button class="tabbtn" data-tab="about">ABOUT</button>
+        <button class="tabbtn" data-tab="socials">SOCIALS</button>
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- HOME TAB -->
+    <section id="tab-home" class="tab active">
+      <div class="row">
+        <section class="card hero">
+          <h1>DALMO — <span class="neontext">Dalmatian Astro-Dog</span></h1>
+          <p class="muted">Buy the sale with <strong>ETH</strong> or <strong>USDT (ERC20)</strong> on <strong>Ethereum</strong>.</p>
+
+          <div class="kpis" style="margin:18px 0">
+            <div class="kpi"><div class="title">Current Phase</div><span class="stat" id="phaseName">SEED SALE</span></div>
+            <div class="kpi"><div class="title">Phase Price</div><span class="stat" id="phasePrice">0.003$</span></div>
+            <div class="kpi"><div class="title">Phase Supply</div><span class="stat" id="phaseSupply">0,6B DALMO</span></div>
+            <div class="kpi"><div class="title">Progress</div><span class="stat" id="progressStat">11%</span></div>
+          </div>
+          <div class="progress"><div id="progressBar" class="bar" style="width:11%"></div></div>
+          <p class="muted" id="saleStatus" style="margin-top:10px">SEED SALE is LIVE.</p>
+
+          <!-- Gallery -->
+          <div class="mgrid" style="margin-top:18px">
+            <div class="meme"><img class="poster" src="1.png" alt="Astro Dalmo taxis to the launchpad"></div>
+            <div class="meme"><img class="poster" src="2.png" alt="Boarding the rocket"></div>
+            <div class="meme"><img class="poster" src="3.png" alt="Pre-launch checks completed"></div>
+            <div class="meme"><img class="poster" src="4.png" alt="To the Moon and beyond"></div>
+            <div class="meme"><img class="poster" src="5.png" alt="Landed on the moon"></div>
+            <div class="meme"><img class="poster" src="6.png" alt="Fund the mission in ETH or USDT"></div>
+          </div>
+        </section>
+
+        <aside class="card">
+          <h2>Sale Phases</h2>
+          <ul>
+            <li><span class="badge">SEED SALE</span> — <strong>$0.003</strong> — <strong>1–30 Sep 2025</strong></li>
+            <li><span class="badge">PRIVATE SALE</span> — <strong>$0.006</strong> — <strong>1–15 Oct 2025</strong></li>
+            <li><span class="badge">PUBLIC SALE</span> — <strong>$0.009</strong> — <strong>16–31 Oct 2025</strong></li>
+          </ul>
+          <div class="muted" style="margin-top:10px">Total supply: 10,000,000,000 DALMO</div>
+          <div class="muted" style="margin-top:10px">Phase buckets: Seed 0.6B • Private 0.9B • Public 1.0B</div>
+
+          <div style="margin-top:16px">
+            <div class="badge">Project wallet (ETH & USDT):</div>
+            <div style="word-break:break-all;margin-top:6px"><code>ETHEREUM ADDRESS : 0xDd9769618981c8b0Cd908ec17f32FB47f7364954</code></div>
+            <div style="word-break:break-all;margin-top:6px"><code>TETHER ADDRESS : 0xDd9769618981c8b0Cd908ec17f32FB47f7364954</code></div>
+          </div>
+
+          <div style="margin-top:16px" class="muted" id="walletInfo">Not connected</div>
+          <hr style="border-color:rgba(255,255,255,.08);margin:16px 0" />
+          <div class="muted" style="font-size:12px">Supported wallets: MetaMask, Exodus, Coinbase Wallet, MyEtherWallet (via extension/bridge). Phantom is hidden here.</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BUY TAB -->
+    <section id="tab-buy" class="tab">
+      <div class="row">
+        <section class="card">
+          <h2>Buy DALMO — <span class="badge" id="buyPhase">SEED SALE</span></h2>
+          <p class="muted">Select currency, enter <strong>USD</strong>, add a <strong>Referral ID</strong> if you have one, then connect & buy.</p>
+
+          <div class="grid2">
+            <div>
+              <label>Pay with</label>
+              <select id="payToken">
+                <option value="ETH">ETH</option>
+                <option value="USDT">USDT (ERC20)</option>
+              </select>
+            </div>
+            <div>
+              <label>Amount (USD)</label>
+              <input id="usdInput" type="number" min="1" step="1" placeholder="100" />
+            </div>
+            <div>
+              <label>Referral ID (optional)</label>
+              <input id="referralId" type="text" placeholder="e.g., 9K2QW7A1" />
+            </div>
+            <div>
+              <label>You'll receive (DALMO)</label>
+              <input id="tokensOut" type="text" disabled value="0" />
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-top:12px">
+            <div id="ethCalcBox">
+              <label>Required ETH (auto)</label>
+              <input id="ethNeeded" type="text" disabled value="0" />
+              <div class="muted" style="font-size:12px">ETH/USD: <span id="ethUsd">…</span> <span id="ethPriceWarn" class="warn hidden">(enter manually if price fails)</span></div>
+            </div>
+            <div id="usdtCalcBox" class="hidden">
+              <label>Required USDT</label>
+              <input id="usdtNeeded" type="text" disabled value="0" />
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <button id="buyBtn" class="btn">Connect & Buy</button>
+            <button id="disconnectBtn" class="btn sec" style="margin-left:8px;display:none">Disconnect</button>
+            <div id="txMsg" class="muted" style="margin-top:10px"></div>
+          </div>
+          <p class="warn" style="margin-top:12px">This page sends your chosen asset directly to the project wallet. Token distribution is handled by the team after the sale. Always verify the address before sending.</p>
+        </section>
+
+        <aside class="card">
+          <h2>Phase</h2>
+          <p id="saleStatusBuy" class="muted">SEED SALE is LIVE.</p>
+          <h2 style="margin-top:12px">Address</h2>
+          <div style="word-break:break-all;margin-top:6px"><code>ETHEREUM ADDRESS : 0xDd9769618981c8b0Cd908ec17f32FB47f7364954</code></div>
+          <div style="word-break:break-all;margin-top:6px"><code>TETHER ADDRESS : 0xDd9769618981c8b0Cd908ec17f32FB47f7364954</code></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WHITEPAPER TAB (UNCHANGED CONTENT) -->
+    <section id="tab-whitepaper" class="tab">
+      <section class="card">
+        <h2>DALMO - Whitepaper</h2>
+
+        <h3>1) Overview</h3>
+        <p>DALMO is a fixed-supply ERC-20 token on Ethereum celebrating the Dalmatian astro-dog. We combine meme-culture with clear incentives: referral rewards, contribution bounties, and transparent token economics. Contract address: <a href="https://etherscan.io/token/0x568e20c20c1b48dDd5E6b9855107886D7FC912E1" target="_blank" rel="noreferrer"><code>0x568e20c20c1b48dDd5E6b9855107886D7FC912E1</code></a>.</p>
+
+        <h3>2) Token Supply & Allocation (10,000,000,000 DALMO)</h3>
+        <table>
+          <thead><tr><th>Bucket</th><th>Amount</th><th>%</th><th>Notes / Locks</th></tr></thead>
+          <tbody>
+            <tr><td>Seed Sale</td><td>600,000,000</td><td>6%</td><td>Fixed price <strong>$0.003</strong> • 1–30 Sep 2025</td></tr>
+            <tr><td>Private Sale</td><td>900,000,000</td><td>9%</td><td>Fixed price <strong>$0.006</strong> • 1–15 Oct 2025</td></tr>
+            <tr><td>Public Sale</td><td>1,000,000,000</td><td>10%</td><td>Fixed price <strong>$0.009</strong> • 16–31 Oct 2025</td></tr>
+            <tr><td>DEX Liquidity & Market-Making</td><td>2,500,000,000</td><td>25%</td><td>LP tokens locked (12–18 months) with staged releases</td></tr>
+            <tr><td>CEX Liquidity & Listings</td><td>1,000,000,000</td><td>10%</td><td>Allocated for listing inventories & market depth</td></tr>
+            <tr><td>Ecosystem Rewards (airdrops, quests, referrals)</td><td>1,500,000,000</td><td>15%</td><td>10% TGE, then 10% quarterly for 9 quarters</td></tr>
+            <tr><td>Treasury & Partnerships</td><td>1,500,000,000</td><td>15%</td><td>3-month cliff, 24-month linear unlock</td></tr>
+            <tr><td>Team & Advisors</td><td>1,000,000,000</td><td>10%</td><td><strong>12-month cliff</strong>, then 24-month linear vesting; multisig-controlled</td></tr>
+          </tbody>
+        </table>
+        <p class="muted">Sales total 2.5B (25%). Non-sale allocations total 7.5B (75%). Sum = 10B.</p>
+
+        <h3>3) Utilities</h3>
+        <ul>
+          <li><strong>Referral Rewards:</strong> Buyers using a valid ID earn <strong>+5%</strong> tokens; referrers earn <strong>+15%</strong> of the buyer’s token amount. Rewards are tallied off-chain from on-site submissions and distributed after each round.</li>
+          <li><strong>Contribution Bounties:</strong> technical tools, analytics, bots, translations, moderation, original content — funded from Ecosystem & Treasury buckets.</li>
+          <li><strong>Community Governance (soft):</strong> token-weighted polls for funding priorities and campaign timing; binding governance may follow post-launch.</li>
+          <li><strong>Access:</strong> allowlists, merch drops, events, and partner perks for holders.</li>
+        </ul>
+
+        <h3>4) “Mint” Ideas (NFT culture)</h3>
+        <ul>
+          <li><strong>Astro Pass (NFT):</strong> limited-edition pass that boosts referral rewards (e.g., +2% buyer bonus when the referrer holds a Pass).</li>
+          <li><strong>Mission Patches (NFT):</strong> badges earned for quests (meme contests, dashboards, AMAs). Burn sets to craft rarer “DALMO Flight Jackets.”</li>
+          <li><strong>Lunar Souvenirs:</strong> art collabs with rotating artists; a portion of proceeds buy & burn DALMO from DEX.</li>
+        </ul>
+
+        <h3>5) Vesting, Locks & Transparency</h3>
+        <ul>
+          <li><strong>Team & Advisors:</strong> 12-month cliff, then 24-month linear vesting via multisig; addresses and schedules published before TGE.</li>
+          <li><strong>DEX LP:</strong> LP tokens from initial pools locked 12–18 months with visible lock txs; extensions announced publicly.</li>
+          <li><strong>Treasury:</strong> multisig with spending caps; monthly transparency posts detailing outflows (KOLs, creatives, infra).</li>
+          <li><strong>Audits:</strong> contracts rely on OpenZeppelin libraries; an external review is planned pre-TGE.</li>
+        </ul>
+
+        <h3>6) Sale Mechanics</h3>
+        <ul>
+          <li><strong>Chain:</strong> Ethereum Mainnet • <strong>Currencies:</strong> ETH, USDT (ERC-20).</li>
+          <li><strong>Seed:</strong> 1–30 Sep 2025 @ $0.003 • <strong>Cap:</strong> 600M tokens.</li>
+          <li><strong>Private:</strong> 1–15 Oct 2025 @ $0.006 • <strong>Cap:</strong> 900M tokens.</li>
+          <li><strong>Public:</strong> 16–31 Oct 2025 @ $0.009 • <strong>Cap:</strong> 1,000M tokens.</li>
+          <li><strong>Distribution:</strong> Tokens/bonuses from on-site purchases are allocated post-round from the sale & reward buckets.</li>
+        </ul>
+
+        <h3>7) Roadmap</h3>
+        <ul>
+          <li><strong>September 2025:</strong> Seed sale live; referral system; community quests v1; media kit + meme comps.</li>
+          <li><strong>Oct 1–15:</strong> Private sale; audit hand-off; CMC/CGL pre-listing submissions; KOL partnerships.</li>
+          <li><strong>Oct 16–31:</strong> Public sale; finalize LP plan; publish vesting/lock addresses; snapshot for referral/airdrop eligibility.</li>
+          <li><strong>~November 2025 (TGE):</strong> DEX listing (Uniswap), LP lock published; post-TGE marketing push; <em>aim</em> for Gate.io listing ~1 month post-launch (subject to compliance & market conditions).</li>
+          <li><strong>Q4 2025:</strong> Ecosystem grants v1; community analytics dashboard; Mission Patch NFT mints.</li>
+          <li><strong>Q1 2026:</strong> Additional CEX outreach, expanded quests, internationalization, governance pilots.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ABOUT TAB -->
+    <section id="tab-about" class="tab">
+      <section class="card">
+        <h2>About DALMO</h2>
+
+        <p>
+          We’re a <strong>team of five crypto enthusiasts</strong> with <strong>10+ years</strong> of combined experience across
+          smart contracts, growth, community, design, and operations. DALMO isn’t “just another meme coin” — it’s a culture-first
+          project with real community ownership and clear incentives for people who help us grow.
+        </p>
+
+        <h3>What we stand for</h3>
+        <ul>
+          <li><strong>Community first:</strong> transparent comms, verifiable on-chain actions, and shared upside.</li>
+          <li><strong>Builders & creators:</strong> we reward meaningful technical and creative contributions.</li>
+          <li><strong>Quality over hype:</strong> steady delivery, no false promises, and public tracking of commitments.</li>
+        </ul>
+
+        <h3>Community Rewards</h3>
+        <ul>
+          <li><strong>Airdrops for contributors:</strong> code, dashboards, bots, translations, moderation, event hosting — contribute and get noticed.</li>
+          <li><strong>Marketing bounties:</strong> original memes, threads, videos, AMAs, write-ups. Share proof and we’ll allocate rewards.</li>
+          <li><strong>Buy bonuses:</strong> verified contributors can earn additional buy bonuses during presale windows.</li>
+          <li>Submit links/screenshots to <a href="mailto:support@dalmo.io">support@dalmo.io</a> or tag posts with <strong>#ASTRODALMO</strong> so we can count them.</li>
+        </ul>
+
+        <h3>Referral Program</h3>
+        <ul>
+          <li>After every successful buy, the site issues you an <strong>8-character Referral ID</strong> and a shareable link:
+            <code>https://www.dalmo.io/?rid=YOURCODE</code> (the form auto-fills the code for new buyers).</li>
+          <li>When a new buyer enters your ID, rewards are earmarked:
+            <ul>
+              <li><strong>Buyer bonus:</strong> <strong>+5%</strong> extra DALMO (based on their token amount at purchase price).</li>
+              <li><strong>Referrer bonus:</strong> <strong>+15%</strong> of the buyer’s token amount.</li>
+            </ul>
+          </li>
+          <li>Bonuses are tracked off-chain from on-site submissions and <em>distributed after sale rounds</em> to the wallets on file.</li>
+          <li>Self-referrals, spam, and fake engagement are excluded; we prioritize genuine community growth.</li>
+        </ul>
+
+        <h3>How you can help (and earn)</h3>
+        <ul>
+          <li>Share DALMO on <strong>X, Instagram, Facebook, Reddit</strong>, and crypto blogs/forums; use <strong>#ASTRODALMO</strong>.</li>
+          <li>Create memes, threads, and videos; host AMAs or community calls.</li>
+          <li>Build tools, dashboards, or bots; translate content; help moderate chats.</li>
+          <li>Email proofs to <a href="mailto:support@dalmo.io">support@dalmo.io</a> — we’ll review and attribute rewards.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- SOCIALS TAB (UPDATED) -->
+    <section id="tab-socials" class="tab">
+      <section class="card">
+        <h2>Socials & Contact</h2>
+        <div class="social-list">
+
+          <!-- CONTACT -->
+          <div class="social-row">
+            <span class="icon" aria-hidden="true">
+              <!-- Envelope icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M3 5h18v14H3z" stroke="var(--mail)" stroke-width="1.8" />
+                <path d="M3 7l9 6 9-6" stroke="var(--mail)" stroke-width="1.8" fill="none"/>
+              </svg>
+            </span>
+            <div>
+              <div><strong>CONTACT</strong> — <a href="mailto:support@dalmo.io">support@dalmo.io</a></div>
+            </div>
+          </div>
+
+          <!-- TELEGRAM NEWS -->
+          <div class="social-row">
+            <span class="icon" aria-hidden="true">
+              <!-- Telegram logo -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="var(--tg)" stroke-width="1.6"/>
+                <path d="M6 12l11-5-3.5 10-3-2.7-2.5 2.1.8-3.4L17 8.4" stroke="var(--tg)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <div><strong>TELEGRAM NEWS CHANNEL</strong> — <a href="https://t.me/DALMO_Official" target="_blank" rel="noreferrer">t.me/DALMO_Official</a></div>
+            </div>
+          </div>
+
+          <!-- TELEGRAM COMMUNITY -->
+          <div class="social-row">
+            <span class="icon" aria-hidden="true">
+              <!-- Telegram logo -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="var(--tg)" stroke-width="1.6"/>
+                <path d="M6 12l11-5-3.5 10-3-2.7-2.5 2.1.8-3.4L17 8.4" stroke="var(--tg)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <div><strong>TELEGRAM COMMUNITY GROUP</strong> — <a href="https://t.me/DALMO_Community" target="_blank" rel="noreferrer">t.me/DALMO_Community</a></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </section>
+
+    <footer>© <span id="year"></span> • DALMO • DYOR</footer>
+  </div>
+
+  <!-- Ethers v5 UMD -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script>
+  (function(){
+    const ETH_CHAIN_ID_HEX = '0x1'; // Ethereum mainnet
+    const RECEIVING_ADDRESS = '0xDd9769618981c8b0Cd908ec17f32FB47f7364954';
+    const USDT_ADDRESS      = '0xdAC17F958D2ee523a2206206994597C13D831ec7'; // ERC20 (6 decimals)
+    const USDT_DECIMALS     = 6;
+
+    // Web3Forms (referral notifications) — key tied to support@dalmo.io
+    const ACCESS_KEY = 'bc231b05-bba8-49f1-8cad-ffec719543f5';
+    const NOTIFY_TO = 'support@dalmo.io';
+
+    const ROUNDS = [
+      { key:'seed',    name:'SEED SALE',    price:0.003, start:new Date('2025-09-01T00:00:00'), end:new Date('2025-09-30T23:59:59'), supply:600_000_000 },
+      { key:'private', name:'PRIVATE SALE', price:0.006, start:new Date('2025-10-01T00:00:00'), end:new Date('2025-10-15T23:59:59'), supply:900_000_000 },
+      { key:'public',  name:'PUBLIC SALE',  price:0.009, start:new Date('2025-10-16T00:00:00'), end:new Date('2025-10-31T23:59:59'), supply:1_000_000_000 }
+    ];
+
+    // Elements
+    const connectBtn     = document.getElementById('connectBtn');
+    const connectModal   = document.getElementById('connectModal');
+    const walletList     = document.getElementById('walletList');
+    const connectDefault = document.getElementById('connectDefault');
+    const closeModalBtn  = document.getElementById('closeModal');
+
+    const buyBtn        = document.getElementById('buyBtn');
+    const disconnectBtn = document.getElementById('disconnectBtn');
+    const payTokenSel   = document.getElementById('payToken');
+    const usdInput      = document.getElementById('usdInput');
+    const tokensOut     = document.getElementById('tokensOut');
+    const ethNeeded     = document.getElementById('ethNeeded');
+    const usdtNeeded    = document.getElementById('usdtNeeded');
+    const ethUsd        = document.getElementById('ethUsd');
+    const ethPriceWarn  = document.getElementById('ethPriceWarn');
+    const ethCalcBox    = document.getElementById('ethCalcBox');
+    const usdtCalcBox   = document.getElementById('usdtCalcBox');
+    const referralIdEl  = document.getElementById('referralId');
+
+    const walletInfo    = document.getElementById('walletInfo');
+    const saleStatus    = document.getElementById('saleStatus');
+    const saleStatusBuy = document.getElementById('saleStatusBuy');
+    const buyPhaseEl    = document.getElementById('buyPhase');
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tabs
+    document.querySelectorAll('.tabbtn').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const id = 'tab-'+btn.dataset.tab;
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }));
+
+    // Prefill Referral ID from URL (?rid=XXXX)
+    try{
+      const u = new URL(window.location.href); const rid = u.searchParams.get('rid');
+      if(rid && rid.length>=6) referralIdEl.value = rid.toUpperCase();
+    }catch(_){}
+
+    // EIP-6963: detect providers; hide Phantom
+    const announced = [];
+    window.addEventListener('eip6963:announceProvider', (event)=>{
+      const infoName = (event.detail?.info?.name || '').toLowerCase();
+      if(infoName.includes('phantom')) return;
+      announced.push(event.detail);
+    });
+    window.dispatchEvent(new Event('eip6963:requestProvider'));
+
+    // Modal open/close
+    connectBtn.addEventListener('click', openConnectModal);
+    connectDefault.addEventListener('click', connectWithProvider);
+    closeModalBtn.addEventListener('click', closeConnectModal);
+    connectModal.addEventListener('click', (e)=>{ if(e.target===connectModal) closeConnectModal(); });
+
+    function openConnectModal(){
+      walletList.innerHTML = '';
+      if(announced.length>0){
+        announced.forEach((d)=>{
+          const btn = document.createElement('button');
+          btn.className='btn walletbtn';
+          btn.textContent = d.info.name;
+          btn.onclick = ()=> selectProvider(d.provider);
+          walletList.appendChild(btn);
+        });
+      }
+      connectModal.style.display='flex';
+    }
+    function closeConnectModal(){ connectModal.style.display='none'; }
+
+    let provider = null, signer = null, userAddress = null, ethPrice = null;
+    let currentRound = null;
+
+    function selectProvider(p){ provider = new ethers.providers.Web3Provider(p, 'any'); connectWithProvider(); }
+
+    async function connectWithProvider(){
+      try{
+        if(!provider){
+          if(!window.ethereum){ throw new Error('No EVM wallet detected. Install MetaMask or Exodus, then reload.'); }
+          provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+        }
+        await provider.send('eth_requestAccounts',[]);
+        const net = await provider.getNetwork();
+        if(net.chainId !== 1){
+          try{ await provider.send('wallet_switchEthereumChain',[{chainId:ETH_CHAIN_ID_HEX}]); }
+          catch(e){ throw new Error('Please switch to Ethereum Mainnet in your wallet.'); }
+        }
+        signer = provider.getSigner();
+        userAddress = await signer.getAddress();
+        walletInfo.textContent = 'Connected: '+short(userAddress)+' on Ethereum';
+        connectBtn.textContent = 'Connected';
+        if(disconnectBtn) disconnectBtn.style.display = 'inline-flex';
+        closeConnectModal();
+      }catch(e){
+        const msg = (e && e.code === 4001) ? 'Connection request rejected in wallet.' : (e?.message || String(e));
+        note(msg);
+      }
+    }
+
+    async function disconnectWallet(){ provider = null; signer = null; userAddress = null; walletInfo.textContent = 'Not connected'; connectBtn.textContent = 'Connect Wallet'; if(disconnectBtn) disconnectBtn.style.display = 'none'; }
+    if(disconnectBtn) disconnectBtn.addEventListener('click', disconnectWallet);
+
+    // ETH price fetch
+    async function fetchEthPrice(){
+      try{
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd',{cache:'no-store'});
+        const j = await res.json();
+        ethPrice = Number(j?.ethereum?.usd || 0);
+        if(ethPrice>0){ if(ethUsd) ethUsd.textContent = '$'+ethPrice.toLocaleString(); if(ethPriceWarn) ethPriceWarn.classList.add('hidden'); calc(); }
+        else throw new Error('No price');
+      }catch(_){
+        if(ethUsd) ethUsd.textContent = 'unavailable';
+        if(ethPriceWarn) ethPriceWarn.classList.remove('hidden');
+        ethPrice = null; calc();
+      }
+    }
+    fetchEthPrice(); setInterval(fetchEthPrice, 60_000);
+
+    // Round status (Home text stays static; Buy shows live phase)
+    function getCurrentRound(){ const now=new Date(); return ROUNDS.find(r=> now>=r.start && now<=r.end) || null; }
+    function refreshPhase(){
+      currentRound = getCurrentRound();
+      let msg='';
+      if(currentRound){ if(buyPhaseEl) buyPhaseEl.textContent=currentRound.name; msg=currentRound.name+' is LIVE.'; if(buyBtn) buyBtn.disabled=false; }
+      else { if(buyPhaseEl) buyPhaseEl.textContent='—'; const now=new Date(); const next=ROUNDS.find(r=> now<r.start); msg = next? (next.name+' opens on '+next.start.toLocaleDateString()) : 'Sales have ended.'; if(buyBtn) buyBtn.disabled=true; }
+      if(saleStatus) saleStatus.textContent='SEED SALE is LIVE.'; // keep static as requested
+      if(saleStatusBuy) saleStatusBuy.textContent = msg;
+      calc();
+    }
+    refreshPhase(); setInterval(refreshPhase, 1000);
+
+    // Inputs & calc
+    if(usdInput) usdInput.addEventListener('input', calc);
+    if(payTokenSel) payTokenSel.addEventListener('change', ()=>{
+      const v = payTokenSel.value;
+      if(v==='ETH'){ ethCalcBox.classList.remove('hidden'); usdtCalcBox.classList.add('hidden'); }
+      else { usdtCalcBox.classList.remove('hidden'); ethCalcBox.classList.add('hidden'); }
+      calc();
+    });
+
+    function calc(){
+      const usd = Number(usdInput?.value||0);
+      const price = currentRound? currentRound.price : 0.003;
+      const tokens = Math.floor(usd / price);
+      if(tokensOut) tokensOut.value = isFinite(tokens)? tokens.toLocaleString() : '0';
+      if(payTokenSel?.value==='ETH'){
+        const need = (ethPrice? usd/ethPrice : 0);
+        if(ethNeeded) ethNeeded.value = ethPrice? precise(need, 6) : 'n/a';
+      } else {
+        if(usdtNeeded) usdtNeeded.value = precise(usd, 2);
+      }
+    }
+
+    // === Referral helpers ===
+    function genRefId(address, txhash){
+      try{
+        const seed = (address||'') + '|' + (txhash||'') + '|' + Date.now().toString();
+        const h = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(seed));
+        const n = BigInt(h);
+        let b36 = n.toString(36).toUpperCase();
+        if(b36.length < 8) b36 = (b36 + '00000000').slice(0,8);
+        return b36.slice(0,8);
+      }catch(_){
+        return Math.random().toString(36).slice(2,10).toUpperCase();
+      }
+    }
+
+    async function logToWeb3Forms(payload){
+      if(!ACCESS_KEY){ console.warn('Missing Web3Forms key'); return {ok:false}; }
+      try{
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            access_key: ACCESS_KEY,
+            subject: 'DALMO Presale Event',
+            from_name: 'DALMO Site',
+            from_email: 'no-reply@dalmo.io',
+            reply_to: NOTIFY_TO,
+            to: NOTIFY_TO,
+            ...payload
+          })
+        });
+        const j = await res.json();
+        return {ok: !!j?.success, resp:j};
+      }catch(e){ return {ok:false, err:e.message||String(e)}; }
+    }
+
+    // Buy
+    if(buyBtn) buyBtn.addEventListener('click', async ()=>{
+      try{
+        if(!currentRound) throw new Error('No active sale phase.');
+        const usd = Number(usdInput.value||0); if(!usd || usd<1) throw new Error('Enter a USD amount (≥ 1).');
+        if(!signer){ openConnectModal(); return; }
+        const pay = payTokenSel.value; let txHash=null;
+
+        const usedRid = (referralIdEl?.value || '').trim().toUpperCase();
+
+        if(pay==='ETH'){
+          if(!ethPrice) throw new Error('ETH price unavailable — try USDT or refresh.');
+          const ethAmt = usd/ethPrice;
+          const wei = ethers.utils.parseEther(String(precise(ethAmt,6)));
+          const tx = await signer.sendTransaction({ to: RECEIVING_ADDRESS, value: wei });
+          txMsg.innerHTML = `Waiting for confirmation… <a target="_blank" href="https://etherscan.io/tx/${tx.hash}">view on Etherscan</a>`;
+          await tx.wait(); txHash=tx.hash;
+        } else {
+          const usdt = new ethers.Contract(USDT_ADDRESS, ['function transfer(address to, uint256 value) public returns (bool)'], signer);
+          const amt = ethers.BigNumber.from(Math.round(usd*(10**USDT_DECIMALS)).toString());
+          const tx = await usdt.transfer(RECEIVING_ADDRESS, amt);
+          txMsg.innerHTML = `Waiting for confirmation… <a target="_blank" href="https://etherscan.io/tx/${tx.hash}">view on Etherscan</a>`;
+          await tx.wait(); txHash=tx.hash;
+        }
+
+        // Compute tokens & bonuses
+        const price = currentRound.price;
+        const tokens = Math.floor(usd / price);
+        const buyerBonus = Math.floor(tokens * 0.05); // +5% for buyer
+        const refBonus   = usedRid ? Math.floor(tokens * 0.15) : 0; // +15% for referrer
+
+        const buyerAddr = await signer.getAddress();
+        const myRid = genRefId(buyerAddr, txHash);
+
+        // Log purchase
+        await logToWeb3Forms({
+          event: 'PURCHASE',
+          to_email: NOTIFY_TO,
+          buyer: buyerAddr,
+          used_ref_id: usedRid || '(none)',
+          pay, usd, tokens, buyer_bonus: buyerBonus, ref_bonus_if_used: refBonus,
+          phase: currentRound.name, price,
+          tx_hash: txHash,
+          timestamp: new Date().toISOString()
+        });
+
+        // Log new referral ID issuance
+        await logToWeb3Forms({
+          event: 'REFERRAL_ISSUE',
+          to_email: NOTIFY_TO,
+          owner: buyerAddr,
+          ref_id: myRid,
+          tx_hash: txHash,
+          timestamp: new Date().toISOString()
+        });
+
+        // Success UI + share link
+        const share = `${location.origin}${location.pathname}?rid=${encodeURIComponent(myRid)}`;
+        txMsg.innerHTML = `Success! <a target="_blank" href="https://etherscan.io/tx/${txHash}">Your transaction</a> • Your Ref ID: <strong>${myRid}</strong><br>
+        Share your link: <input style="width:100%;margin-top:6px" value="${share}" readonly onclick="this.select()">`;
+
+      }catch(e){ note(e.message||String(e)); }
+    });
+
+    function note(msg){ const el=document.getElementById('txMsg'); if(el) el.textContent = msg; }
+    function precise(n, dp){ const m=Math.pow(10,dp||6); return Math.round(n*m)/m; }
+    function short(addr){ return addr? addr.slice(0,6)+'…'+addr.slice(-4) : ''; }
+
+    // Close modal on ESC
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeConnectModal(); });
+
+    // Cache-buster helper for gallery (optional: bump once when you replace images)
+    // const versionTag = '2025-09-01a';
+    // document.querySelectorAll('.poster').forEach(img=>{
+    //   const u = new URL(img.getAttribute('src'), location.href);
+    //   u.searchParams.set('v', versionTag);
+    //   img.src = u.pathname + '?' + u.searchParams.toString();
+    // });
+  })();
+  </script>
+</body>
+</html>
